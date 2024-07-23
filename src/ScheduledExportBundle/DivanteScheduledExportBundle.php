@@ -4,13 +4,13 @@
  * @author    Anna Zavodian <azavodian@divante.pl>
  * @copyright Copyright (c) 2017 Divante Ltd. (https://divante.co)
  */
-
 declare(strict_types=1);
 
 namespace Divante\ScheduledExportBundle;
 
 use Elements\Bundle\ProcessManagerBundle\ElementsProcessManagerBundle;
 use Pimcore\Extension\Bundle\AbstractPimcoreBundle;
+use Pimcore\Extension\Bundle\Installer\InstallerInterface;
 use Pimcore\Extension\Bundle\Traits\PackageVersionTrait;
 use Pimcore\HttpKernel\Bundle\DependentBundleInterface;
 use Pimcore\HttpKernel\BundleCollection\BundleCollection;
@@ -26,7 +26,7 @@ class DivanteScheduledExportBundle extends AbstractPimcoreBundle implements Depe
     private const BUNDLE_NAME = 'DivanteScheduledExportBundle';
     public const TABLE_NAME = 'bundle_scheduledexport_registry';
 
-    public function getInstaller()
+    public function getInstaller(): ?InstallerInterface
     {
         return $this->container->get(Installer::class);
     }
@@ -60,12 +60,12 @@ class DivanteScheduledExportBundle extends AbstractPimcoreBundle implements Depe
         ];
     }
 
-    public function getNiceName()
+    public function getNiceName(): string
     {
         return self::BUNDLE_NAME;
     }
 
-    public static function registerDependentBundles(BundleCollection $collection)
+    public static function registerDependentBundles(BundleCollection $collection): void
     {
         $collection->addBundle(ElementsProcessManagerBundle::class, 10);
     }
