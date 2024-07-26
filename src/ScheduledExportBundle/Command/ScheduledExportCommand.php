@@ -142,7 +142,9 @@ EOT
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        self::initProcessManager($input->getOption('monitoring-item-id'), ['autoCreate' => true]);
+        $monitoringItemId = $input->getOption('monitoring-item-id');
+        $monitoringItemId = empty($monitoringItemId) ? null : (int) $monitoringItemId;
+        self::initProcessManager($monitoringItemId, ['autoCreate' => true]);
 
         $monitoringItem = self::getMonitoringItem();
 

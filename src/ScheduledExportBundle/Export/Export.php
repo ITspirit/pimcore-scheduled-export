@@ -323,13 +323,13 @@ class Export
         $this->listing = new $className();
         $this->listing->setCondition($this->condition);
         $this->listing->addConditionParam(
-            'o_path LIKE ?',
+            'path LIKE ?',
             rtrim($objectsFolder->getFullPath(), '/') . '/%'
         );
-        $this->listing->addConditionParam('o_classId = ?', $this->gridConfig->getClassId());
+        $this->listing->addConditionParam('oo_classId = ?', $this->gridConfig->getClassId());
 
         if ($this->changesFromTimestamp) {
-            $this->listing->addConditionParam('o_modificationDate >= ?', $this->changesFromTimestamp);
+            $this->listing->addConditionParam('modificationDate >= ?', $this->changesFromTimestamp);
         }
         $this->listing->setUnpublished(true);
         if ($this->types) {
