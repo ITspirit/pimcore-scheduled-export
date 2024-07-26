@@ -1,11 +1,9 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Divante\ScheduledExportBundle\Event;
 
 use Symfony\Contracts\EventDispatcher\Event;
-
 class BatchExportedEvent extends Event
 {
     public const NAME = 'divante.scheduled_export.batch_exported';

@@ -1,15 +1,14 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Divante\ScheduledExportBundle\Controller;
 
 use Exception;
-use Pimcore\Bundle\AdminBundle\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Pimcore\Controller\Traits\JsonHelperTrait;
 use Pimcore\Controller\UserAwareController;
 use Pimcore\Model\DataObject\ClassDefinition;
-use Pimcore\Model\GridConfig;
+use Pimcore\Bundle\AdminBundle\Model\GridConfig;
 use Pimcore\Model\User;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;

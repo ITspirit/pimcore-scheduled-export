@@ -1,12 +1,11 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Divante\ScheduledExportBundle;
 
 use Divante\ScheduledExportBundle\Model\ScheduledExportRegistry;
-use Pimcore\Db\Connection;
-use Pimcore\Db\ConnectionInterface;
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Driver\Connection as ConnectionInterface;
 use Pimcore\Extension\Bundle\Installer\SettingsStoreAwareInstaller;
 use Pimcore\Model\User\Permission\Definition;
 use Pimcore\Model\WebsiteSetting\Listing;
@@ -49,7 +48,7 @@ class Installer extends SettingsStoreAwareInstaller
     protected function createTables(): void
     {
         $db = $this->getDb();
-        $db->query(
+        $db->executeQuery(
             'CREATE TABLE IF NOT EXISTS `' . DivanteScheduledExportBundle::TABLE_NAME . '` (
               `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
               `gridConfigId` VARCHAR(255) NOT NULL,
@@ -80,11 +79,11 @@ class Installer extends SettingsStoreAwareInstaller
             DivanteScheduledExportBundle::TABLE_NAME,
         ];
         foreach ($tables as $table) {
-            $this->getDb()->query('DROP TABLE IF EXISTS ' . $table);
+            $this->getDb()->executeQuery('DROP TABLE IF EXISTS ' . $table);
         }
 
         foreach ($this->permissions as $permissionKey) {
-            $this->getDb()->query(
+            $this->getDb()->executeQuery(
                 'DELETE FROM users_permission_definitions WHERE ' . $this->getDb()->quoteIdentifier('key').' = :permission',
                 ['permission' => $permissionKey]
             );
